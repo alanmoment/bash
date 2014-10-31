@@ -1,19 +1,18 @@
-[core]
-        quotepath = false # chinese file
 [user]
-	name = alan.chen
-	email = alan.chen@unalis.com.tw
+	name = Alan-iMac
+	email = alan.moment77@gmail.com
+[core]
+	quotepath = false # chinese file
 [color]
-        diff = auto
-        status = auto
-        branch = auto
-        log = auto
-        ui = true
-[gui]
+	diff = auto
+	status = auto
+	branch = auto
+	log = auto
+	ui = auto
 [alias]
-        co = checkout
-        ci = commit
-        st = status
-        br = branch
+	co = checkout
+	ci = commit
+	st = status
+	br = branch
 [push]
-        default = simple
+	default = simple
