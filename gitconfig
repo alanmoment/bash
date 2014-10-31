@@ -1,0 +1,19 @@
+[core]
+        quotepath = false # chinese file
+[user]
+	name = alan.chen
+	email = alan.chen@unalis.com.tw
+[color]
+        diff = auto
+        status = auto
+        branch = auto
+        log = auto
+        ui = true
+[gui]
+[alias]
+        co = checkout
+        ci = commit
+        st = status
+        br = branch
+[push]
+        default = simple
