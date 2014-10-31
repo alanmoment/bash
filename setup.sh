@@ -58,20 +58,26 @@ function setup_softlink() {
 # 將自定的command載入.bashrc
 # 先檢查有無.bashrc
 function setup_bashrc() {
-	if [ ! -f "$HOME/.bashrc" ]; then
-		touch $HOME/.bashrc
+	if [ ! -f "$HOME/.bash_profile" ]; then
+		touch $HOME/.bash_profile
 	fi
 
-	filename="$HOME/.bashrc"
+	filename="$HOME/.bash_profile"
 	exec < $filename
 	WRITE=true
 	while read line
 	do
-		[ "${line}" == ". $BASH_HOME/bash_profile # My default config" ] && WRITE=false
+		[[ `echo "${line}" | grep "^# Auto *"` ]] && WRITE=false
 	done
 
-	[[ -f "$HOME/.bashrc" && $WRITE == true ]] && echo "\n\n. $BASH_HOME/bash_profile # My default config" >> $HOME/.bashrc
-	source $HOME/.bashrc
+	if [[ -f "$HOME/.bash_profile" ]]; then
+		echo "" >> $HOME/.bash_profile
+		echo '# Auto load my default config' >> $HOME/.bash_profile
+		echo 'export BASH_HOME='"${BASH_HOME}" >> $HOME/.bash_profile
+		echo '[[ -f "${HOME}/.bash_profile" ]] && source "$BASH_HOME/bash_profile"' >> $HOME/.bash_profile
+		source $HOME/.bash_profile
+	fi
+	#[[ -f "$HOME/.bash_profile" && $WRITE == true ]] && echo '\n\n[[ -f "${HOME}/.bash_profile" ]] && source "$BASH_HOME/bash_profile"' >> $HOME/.bash_profile
 }
 
 function setup() {
@@ -84,6 +90,7 @@ function setup() {
 	green_text "[softlink] is created"
 	setup_bashrc
 	green_text "Auto setup is finished"
+	echo "Please login again"
 }
 
 # execute
