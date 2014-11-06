@@ -1,2 +1,4 @@
-#vim
-#.gitmodules
+vim
+.gitmodules
+*.swp
+

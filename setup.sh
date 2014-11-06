@@ -1,5 +1,5 @@
 #! /bin/bash
-HOME="/Users/alan"
+
 BASH_HOME=$(pwd)
 IP=$(ipconfig getifaddr en1)
 USERDATA=(name email)
@@ -18,20 +18,20 @@ function setup_gitconfig() {
 			echo "		${USERDATA[$i]} = ${MY[$i]}" >> $FILE
 		done
 		echo "[core]" >> $FILE
-		echo "		quotepath = false # chinese file" >> $FILE
+		echo "      quotepath = false # chinese file" >> $FILE
 		echo "[color]" >> $FILE
-		echo "		diff = auto" >> $FILE
-		echo "		status = auto" >> $FILE
-		echo "		branch = auto" >> $FILE
-		echo "		log = auto" >> $FILE
-		echo "		ui = auto" >> $FILE
+		echo "      diff = auto" >> $FILE
+		echo "      status = auto" >> $FILE
+		echo "      branch = auto" >> $FILE
+		echo "      log = auto" >> $FILE
+		echo "      ui = auto" >> $FILE
 		echo "[alias]" >> $FILE
-		echo "		co = checkout" >> $FILE
-		echo "		ci = commit" >> $FILE
-		echo "		st = status" >> $FILE
-		echo "		br = branch" >> $FILE
+		echo "      co = checkout" >> $FILE
+		echo "      ci = commit" >> $FILE
+		echo "      st = status" >> $FILE
+		echo "      br = branch" >> $FILE
 		echo "[push]" >> $FILE
-		echo "		default = simple" >> $FILE
+		echo "      default = simple" >> $FILE
 	fi
 }
 
