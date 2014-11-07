@@ -11,7 +11,7 @@ function alan {
 
 alias reload="source ~/.bash_profile"
 alias composer="$BASH_HOME/plugins/composer.phar"
-#alias vim="open -a /Applications/MacVim.app $1"
+alias vim="open -a /Applications/MacVim.app $1"
 alias ll="ls -all"
 
 # git

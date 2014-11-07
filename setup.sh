@@ -19,6 +19,7 @@ function setup_gitconfig() {
 		done
 		echo "[core]" >> $FILE
 		echo "      quotepath = false # chinese file" >> $FILE
+                echo "      editor = /usr/bin/vim # fix error: There was a problem with the editor 'vi'" >> $FILE
 		echo "[color]" >> $FILE
 		echo "      diff = auto" >> $FILE
 		echo "      status = auto" >> $FILE
