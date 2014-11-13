@@ -42,12 +42,12 @@ function green_text() {
 }
 
 function setup_vim() {
-	if [ ! -d "$BASH_HOME/vim" ]; then
+	#if [ ! -d "$BASH_HOME/vim" ]; then
 		git submodule add https://github.com/drmikehenry/vimfiles.git $BASH_HOME/vim
-	else
+	#else
                 git submodule init
 		git submodule update
-	fi
+	#fi
 }
 
 function setup_softlink() {
