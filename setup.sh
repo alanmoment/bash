@@ -69,7 +69,7 @@ function setup_bashrc() {
 	WRITE=true
 	while read line
 	do
-		[[ `echo "${line}" | grep "^# Auto *"` ]] && WRITE=false
+		[[ `echo "${line}" | grep "^# Auto *"` && $WRITE == true ]] && WRITE=false
 	done
 
 	if [[ -f "$HOME/.bash_profile" ]]; then
