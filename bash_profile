@@ -36,10 +36,10 @@ function git_since_last_commit {
 }
 
 function my_hostname {
-    if [[ `echo "${Hostname}" | grep "^-bash"` ]]; then
-        echo "{"$(hostname)"} ";
+    if [[ `echo $(hostname) | grep "()"` ]]; then
+        echo "{"$(Hostname)"} "; # Mac
     else
-        echo "{"$(Hostname)"} ";
+        echo "{"$(hostname)"} "; # Linux
     fi
     
 }
