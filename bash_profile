@@ -43,11 +43,11 @@ function my_hostname {
     else
         echo $(hostname)":"; # Linux
     fi
-    
 }
 
 # Set PS1 color and git branch notification
-PS1="[\033[1;31m\]\$(my_hostname)\[\033[0m\]\[\033[1;32m\]\w\[\033[0m\]] \[\033[0m\]\[\033[1;36m\]\$(git_branch)\[\033[0;33m\]\$(git_since_last_commit)\[\033[0m\]$ "
+PS1="[\[\033[1;31m\]\$(my_hostname)\[\033[0m\]\[\033[1;32m\]\w\[\033[0m\]] \[\033[0m\]\[\033[1;36m\]\$(git_branch)\[\033[0;33m\]\$(git_since_last_commit)\[\033[0m\]$ "
 #PS1="[\[\033[1;32m\]\w\[\033[0m\]] \[\033[0m\]\[\033[1;36m\]\$(git_branch)\[ \033[0;33m\]\$(git_since_last_commit)\[\033[0m\] \033[1;32m\]\$(my_hostname)\[\033[0m\]$ "
+#PS1="[\[\033[1;32m\]\w\[\033[0m\]]\[\033[0m\]\[\033[1;36m\]\$(git_branch)\[\033[0;33m\]\$(git_since_last_commit)\[\033[0m\]$ "
 
 [ -f $BASH_HOME/plugins/git-bash-completion.sh ] && . $BASH_HOME/plugins/git-bash-completion.sh
