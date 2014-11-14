@@ -36,7 +36,12 @@ function git_since_last_commit {
 }
 
 function my_hostname {
-    echo "{"$(Hostname)"} ";
+    if [[ `echo "${Hostname}" | grep "^-bash"` ]]; then
+        echo "{"$(hostname)"} ";
+    else
+        echo "{"$(Hostname)"} ";
+    fi
+    
 }
 
 # Set PS1 color and git branch notification
