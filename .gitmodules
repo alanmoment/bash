@@ -1,3 +1,4 @@
 [submodule "vim"]
 	path = vim
 	url = https://github.com/drmikehenry/vimfiles.git
+	ignore = dirty # fix untracked or modified content in submodules?
