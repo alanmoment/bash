@@ -15,7 +15,7 @@ function setup_gitconfig() {
 		touch $FILE
 		echo "[user]" >> $FILE
 		for ((i=0; i<${#MY[@]}; i++)); do
-			echo "		${USERDATA[$i]} = ${MY[$i]}" >> $FILE
+			echo "      ${USERDATA[$i]} = ${MY[$i]}" >> $FILE
 		done
 		echo "[core]" >> $FILE
 		echo "      quotepath = false # chinese file" >> $FILE
@@ -42,12 +42,9 @@ function green_text() {
 }
 
 function setup_vim() {
-	#if [ ! -d "$BASH_HOME/vim" ]; then
-		git submodule add https://github.com/drmikehenry/vimfiles.git $BASH_HOME/vim
-	#else
-                git submodule init
-		git submodule update
-	#fi
+	git submodule add https://github.com/drmikehenry/vimfiles.git $BASH_HOME/vim
+        git submodule init
+	git submodule update
 }
 
 function setup_softlink() {
@@ -69,10 +66,10 @@ function setup_bashrc() {
 	WRITE=true
 	while read line
 	do
-		[[ `echo "${line}" | grep "^# Auto *"` && $WRITE == true ]] && WRITE=false
+		[[ `echo "${line}" | grep "^# Auto *"` ]] && WRITE=false
 	done
 
-	if [[ -f "$HOME/.bash_profile" ]]; then
+	if [[ -f "$HOME/.bash_profile" && $WRITE == true ]]; then
 		echo "" >> $HOME/.bash_profile
 		echo '# Auto load my default config' >> $HOME/.bash_profile
 		echo 'export BASH_HOME='"${BASH_HOME}" >> $HOME/.bash_profile
