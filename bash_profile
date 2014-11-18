@@ -9,6 +9,7 @@ function alan {
   echo "Here is Documents home."
 }
 
+alias go="find ./ | xargs grep --color -n -s $1"
 alias reload="source ~/.bash_profile"
 alias composer="$BASH_HOME/plugins/composer.phar"
 #alias vim="open -a /Applications/MacVim.app $1"
