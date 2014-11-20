@@ -12,7 +12,7 @@ function alan {
 alias go="find ./ | xargs grep --color -n -s $1"
 alias reload="source ~/.bash_profile"
 alias composer="$BASH_HOME/plugins/composer.phar"
-#alias vim="open -a /Applications/MacVim.app $1"
+alias mvim="open -a /Applications/MacVim.app $1"
 #alias phpunit="$(pwd)/vendor/bin/phpunit"
 alias ll="ls -all"
 alias tomcat-log="tail -f tail -f /usr/lib/tomcat7/logs/catalina.out"
