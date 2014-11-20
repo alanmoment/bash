@@ -15,24 +15,24 @@ function setup_gitconfig() {
 		touch $FILE
 		echo "[user]" >> $FILE
 		for ((i=0; i<${#MY[@]}; i++)); do
-			echo "      ${USERDATA[$i]} = ${MY[$i]}" >> $FILE
+			echo "        ${USERDATA[$i]} = ${MY[$i]}" >> $FILE
 		done
 		echo "[core]" >> $FILE
-		echo "      quotepath = false # chinese file" >> $FILE
-                echo "      editor = /usr/bin/vim # fix error: There was a problem with the editor 'vi'" >> $FILE
+		echo "        quotepath = false # chinese file" >> $FILE
+                echo "        editor = /usr/bin/vim # fix error: There was a problem with the editor 'vi'" >> $FILE
 		echo "[color]" >> $FILE
-		echo "      diff = auto" >> $FILE
-		echo "      status = auto" >> $FILE
-		echo "      branch = auto" >> $FILE
-		echo "      log = auto" >> $FILE
-		echo "      ui = auto" >> $FILE
+		echo "        diff = auto" >> $FILE
+		echo "        status = auto" >> $FILE
+		echo "        branch = auto" >> $FILE
+		echo "        log = auto" >> $FILE
+		echo "        ui = auto" >> $FILE
 		echo "[alias]" >> $FILE
-		echo "      co = checkout" >> $FILE
-		echo "      ci = commit" >> $FILE
-		echo "      st = status" >> $FILE
-		echo "      br = branch" >> $FILE
+		echo "        co = checkout" >> $FILE
+		echo "        ci = commit" >> $FILE
+		echo "        st = status" >> $FILE
+		echo "        br = branch" >> $FILE
 		echo "[push]" >> $FILE
-		echo "      default = simple" >> $FILE
+		echo "        default = simple" >> $FILE
 	fi
 }
 
