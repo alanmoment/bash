@@ -89,6 +89,9 @@ function setup() {
 	green_text "[softlink] is created"
 	setup_bashrc
 	green_text "Auto setup is finished"
+
+	chmod a+x plugins/git-push-remote-option.sh
+
 	echo "Please login again"
 }
 

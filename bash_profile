@@ -18,6 +18,7 @@ alias ll="ls -all"
 alias tomcat-log="tail -f tail -f /usr/lib/tomcat7/logs/catalina.out"
 alias tomcat-down="sudo /usr/lib/tomcat7/bin/shutdown.sh"
 alias tomcat-start="sudo /usr/lib/tomcat7/bin/startup.sh"
+alias git-push="sh $BASH_HOME/plugins/git-push-remote-option.sh"
 
 # git
 # Get Git Branch information
