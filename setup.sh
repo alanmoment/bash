@@ -31,6 +31,7 @@ function setup_gitconfig() {
 		echo "        ci = commit" >> $FILE
 		echo "        st = status" >> $FILE
 		echo "        br = branch" >> $FILE
+		echo "        mg = merge --no-ff" >> $FILE
 		echo "[push]" >> $FILE
 		echo "        default = simple" >> $FILE
 	fi
@@ -89,6 +90,9 @@ function setup() {
 	green_text "[softlink] is created"
 	setup_bashrc
 	green_text "Auto setup is finished"
+
+	chmod a+x plugins/git-push-remote-option.sh
+
 	echo "Please login again"
 }
 
