@@ -31,6 +31,7 @@ function setup_gitconfig() {
 		echo "        ci = commit" >> $FILE
 		echo "        st = status" >> $FILE
 		echo "        br = branch" >> $FILE
+		echo "        mg = merge --no-ff" >> $FILE
 		echo "[push]" >> $FILE
 		echo "        default = simple" >> $FILE
 	fi
