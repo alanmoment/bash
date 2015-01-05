@@ -2,17 +2,23 @@
 
 NORMAL=`printf "\E[0;37;m"`
 BOLD_NORMAL=`printf "\E[1;37;40m"`
-BLUE=`printf "\E[0;36;40m"`
+BLUE=`printf "\E[0;34;40m"`
+GREEN_BLUE=`printf "\E[0;36;40m"`
 YELLOW=`printf "\E[0;33;40m"`
 RED=`printf "\E[0;31;40m"`
 RED_UNDERLINE=`printf "\E[4;31;40m"`
+
+if [ ! -d .git ]; then
+    echo "Here is not git repository."
+    exit
+fi
 
 git=$(which git)
 remoteList=($(git remote show))
 remoteCount=${#remoteList[@]}
 
 show_menu(){
-    echo "${BLUE}Remote list：${NORMAL}"
+    echo "${GREEN_BLUE}Remote list：${NORMAL}"
     for ((i=0; i<$remoteCount; i++)); do
         pushUrl=`git remote show -n ${remoteList[$i]} | grep 'Push' | awk -F "Push  " '{print $2}'`
         echo "${YELLOW}$((i+1)))${NORMAL} ${BOLD_NORMAL}${remoteList[$i]}${NORMAL} [${RED_UNDERLINE}$pushUrl${NORMAL}]"
@@ -30,7 +36,6 @@ function option_picked() {
     MESSAGE=${@:-\"${RESET}Error: No message passed\"}
     echo "${COLOR}${MESSAGE}${RESET}"
 }
-
 
 branch=`git branch | sed -n '/\* /s///p'`
 show_menu
