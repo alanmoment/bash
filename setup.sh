@@ -5,7 +5,8 @@ IP=$(ipconfig getifaddr en1)
 USERDATA=(name email)
 IMAC=(Alan-iMac alan.moment77@gmail.com)
 UNALIS=(alan.chen alan.chen@unalis.com.tw)
-
+BASH_PROFILE=".bash_profile"
+BASH_PROFILE_PLUGIN=".bash_profile_plugin"
 
 function setup_gitconfig() {
 	MY[0]=${IMAC[0]}
@@ -39,41 +40,58 @@ function setup_gitconfig() {
 }
 
 function setup_gitdiff() {
-	FILE=$BASH_HOME/plugins/git-diff-wrapper.sh
+	FILE="$BASH_HOME/$BASH_PROFILE_PLUGIN"
+	exec < $FILE
+	WRITE=true
+	while read line
+	do
+		[[ `echo "${line}" | grep "^alias icdiff *"` ]] && WRITE=false
+	done
+
+	if [ $WRITE == false ]; then
+		return
+	fi
+
+	FILE="$BASH_HOME/plugins/git-diff-wrapper.sh"
 	if [ -f $FILE ]; then
 		return
 	fi
 	touch $FILE
 	echo "#!/bin/bash" >> $FILE
-	echo "$BASH_HOME/icdiff \$2 \$5" >> $FILE
+	echo "$BASH_HOME/plugins/icdiff \$2 \$5" >> $FILE
 	chmod +x $FILE
 
 	curl -s https://raw.githubusercontent.com/jeffkaufman/icdiff/release-1.7.2/icdiff > $BASH_HOME/plugins/icdiff
-	chmod +x $BASH_HOME/plugins/icdiff
+	chmod +x "$BASH_HOME/plugins/icdiff"
 
-	echo "" >> $BASH_HOME/extra_bash_profile
-	echo "# git diff alias" >> $BASH_HOME/extra_bash_profile
-	echo "alias icdiff=$BASH_HOME/plugins/icdiff --highlight" >> $BASH_HOME/extra_bash_profile
+	FILE="$BASH_HOME/$BASH_PROFILE_PLUGIN"
+	echo '' >> $FILE
+	echo '# git diff alias' >> $FILE
+	echo 'alias icdiff="$BASH_HOME/plugins/icdiff --highlight"' >> $FILE
 
-	FILE=$BASH_HOME/gitconfig
+	FILE="$BASH_HOME/gitconfig"
 	echo "[diff]" >> $FILE
 	echo "		external = $BASH_HOME/plugins/git-diff-wrapper.sh" >> $FILE
 }
 
 function setup_gitpush() {
-	filename="$BASH_HOME/extra_bash_profile"
-	exec < $filename
+	FILE="$BASH_HOME/$BASH_PROFILE_PLUGIN"
+	exec < $FILE
 	WRITE=true
 	while read line
 	do
 		[[ `echo "${line}" | grep "^alias git-push *"` ]] && WRITE=false
 	done
 
-	if [[ -f "$BASH_HOME/plugins/git-push-remote-option.sh" && $WRITE == true ]]; then
+	if [ $WRITE == false ]; then
+		return
+	fi	
+
+	if [ -f "$BASH_HOME/plugins/git-push-remote-option.sh" ]; then
 		chmod a+x plugins/git-push-remote-option.sh
-		echo "" >> $BASH_HOME/extra_bash_profile
-		echo "# git push menu alias" >> $BASH_HOME/extra_bash_profile
-		echo "alias git-push=sh $BASH_HOME/plugins/git-push-remote-option.sh" >> $BASH_HOME/extra_bash_profile
+		echo '' >> $FILE
+		echo '# git push menu alias' >> $FILE
+		echo 'alias git-push="sh ${BASH_HOME}/plugins/git-push-remote-option.sh"' >> $FILE
 	fi
 }
 
@@ -114,15 +132,16 @@ function setup_bashrc() {
 		echo "" >> $HOME/.bash_profile
 		echo '# Auto load my default config' >> $HOME/.bash_profile
 		echo 'export BASH_HOME='"${BASH_HOME}" >> $HOME/.bash_profile
-		echo '[[ -f "${HOME}/.bash_profile" ]] && source "$BASH_HOME/bash_profile"' >> $HOME/.bash_profile
+		echo '[[ -f "${HOME}/.bash_profile" ]] && source "$BASH_HOME/'$BASH_PROFILE'"' >> $HOME/.bash_profile
 		source $HOME/.bash_profile
 	fi
-	#[[ -f "$HOME/.bash_profile" && $WRITE == true ]] && echo '\n\n[[ -f "${HOME}/.bash_profile" ]] && source "$BASH_HOME/bash_profile"' >> $HOME/.bash_profile
+	#[[ -f "$HOME/.bash_profile" && $WRITE == true ]] && echo '\n\n[[ -f "${HOME}/.bash_profile" ]] && source "$BASH_PROFILE"' >> $HOME/.bash_profile
 }
 
 function setup() {
-	if [ ! -f "$BASH_HOME/extra_bash_profile" ]; then
-		touch "$BASH_HOME/extra_bash_profile"
+	FILE="$BASH_HOME/$BASH_PROFILE_PLUGIN"
+	if [ ! -f "$FILE" ]; then
+		touch $FILE
 	fi
 
 	green_text "Auto setup is started"
@@ -145,6 +164,7 @@ function setup() {
 	setup_bashrc
 	green_text "Auto setup is finished"
 
+	source $HOME/.bash_profile
 	echo "Please login again"
 }
 

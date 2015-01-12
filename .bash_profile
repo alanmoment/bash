@@ -53,4 +53,4 @@ PS1="[\[\033[1;31m\]\$(my_hostname)\[\033[0m\]\[\033[1;32m\]\w\[\033[0m\]] \[\03
 
 [ -f $BASH_HOME/plugins/git-bash-completion.sh ] && . $BASH_HOME/plugins/git-bash-completion.sh
 
-. $BASH_HOME/extra_bash_profile
+. $BASH_HOME/.bash_profile_plugin
