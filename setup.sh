@@ -29,11 +29,15 @@ function setup_gitconfig() {
 		echo "		log = auto" >> $FILE
 		echo "		ui = auto" >> $FILE
 		echo "[alias]" >> $FILE
+		echo "		df = diff" >> $FILE
 		echo "		co = checkout" >> $FILE
 		echo "		ci = commit" >> $FILE
 		echo "		st = status" >> $FILE
 		echo "		br = branch" >> $FILE
 		echo "		mg = merge --no-ff" >> $FILE
+		echo "		lg = log -p" >> $FILE
+		echo "		lol = log --graph --decorate --pretty=oneline --abbrev-commit" >> $FILE
+		echo "		lola = log --graph --decorate --pretty=oneline --abbrev-commit --all" >> $FILE
 		echo "[push]" >> $FILE
 		echo "		default = simple" >> $FILE
 	fi
