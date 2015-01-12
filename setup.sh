@@ -53,10 +53,14 @@ function setup_gitdiff() {
 	curl -s https://raw.githubusercontent.com/jeffkaufman/icdiff/release-1.7.2/icdiff > $BASH_HOME/plugins/icdiff
 	chmod +x $BASH_HOME/plugins/icdiff
 
-	echo "" >> $BASH_HOME/bash_profile
-	echo "# git diff alias" >> $BASH_HOME/bash_profile
-	echo "alias icdiff=$BASH_HOME/plugins/icdiff --highlight" >> $BASH_HOME/bash_profile
+	echo "" >> $BASH_HOME/extra_bash_profile
+	echo "# git diff alias" >> $BASH_HOME/extra_bash_profile
+	echo "alias icdiff=$BASH_HOME/plugins/icdiff --highlight" >> $BASH_HOME/extra_bash_profile
 	source $HOME/.bash_profile
+
+	FILE=$BASH_HOME/gitconfig
+	echo "[diff]" >> $FILE
+	echo "				external = $BASH_HOME/plugins/git-diff-wrapper.sh" >> $FILE
 }
 
 function setup_gitpush() {
@@ -70,7 +74,7 @@ function setup_gitpush() {
 
 	if [[ -f "$BASH_HOME/plugins/git-push-remote-option.sh" && $WRITE == true ]]; then
 		chmod a+x plugins/git-push-remote-option.sh
-		echo "alias git-push=sh $BASH_HOME/plugins/git-push-remote-option.sh" >> $BASH_HOME/bash_profile
+		echo "alias git-push=sh $BASH_HOME/plugins/git-push-remote-option.sh" >> $BASH_HOME/extra_bash_profile
 		source $HOME/.bash_profile
 	fi
 }
@@ -119,6 +123,10 @@ function setup_bashrc() {
 }
 
 function setup() {
+	if [ ! -f "$BASH_HOME/extra_bash_profile" ]; then
+		touch "$BASH_HOME/extra_bash_profile"
+	fi
+
 	green_text "Auto setup is started"
 
 	setup_gitconfig
