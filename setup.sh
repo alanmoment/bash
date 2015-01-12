@@ -6,6 +6,7 @@ USERDATA=(name email)
 IMAC=(Alan-iMac alan.moment77@gmail.com)
 UNALIS=(alan.chen alan.chen@unalis.com.tw)
 
+
 function setup_gitconfig() {
 	MY[0]=${IMAC[0]}
 	MY[1]=${IMAC[1]}
@@ -19,7 +20,7 @@ function setup_gitconfig() {
 		done
 		echo "[core]" >> $FILE
 		echo "        quotepath = false # chinese file" >> $FILE
-                echo "        editor = /usr/bin/vim # fix error: There was a problem with the editor 'vi'" >> $FILE
+    echo "        editor = /usr/bin/vim # fix error: There was a problem with the editor 'vi'" >> $FILE
 		echo "[color]" >> $FILE
 		echo "        diff = auto" >> $FILE
 		echo "        status = auto" >> $FILE
@@ -34,7 +35,27 @@ function setup_gitconfig() {
 		echo "        mg = merge --no-ff" >> $FILE
 		echo "[push]" >> $FILE
 		echo "        default = simple" >> $FILE
+		echo "[diff]" >> $FILE
+		echo "				external = $BASH_HOME/plugins/git-diff-wrapper.sh" >> $FILE
 	fi
+}
+
+function setup_gitdiff() {
+	FILE=$BASH_HOME/plugins/git-diff-wrapper.sh
+	if [ -f $FILE ]; then
+		return
+	fi
+	touch $FILE
+	echo "#!/bin/bash" >> $FILE
+	echo "$BASH_HOME/icdiff \$2 \$5" >> $FILE
+	chmod +x $FILE
+
+	curl -s https://raw.githubusercontent.com/jeffkaufman/icdiff/release-1.7.2/icdiff > $BASH_HOME/plugins/icdiff
+	chmod +x $BASH_HOME/plugins/icdiff
+
+	echo "" >> $BASH_HOME/bash_profile
+	echo "# git diff alias" >> $BASH_HOME/bash_profile
+	echo "alias icdiff=$BASH_HOME/plugins/icdiff --highlight" >> $BASH_HOME/bash_profile
 }
 
 function green_text() {
@@ -44,7 +65,7 @@ function green_text() {
 
 function setup_vim() {
 	git submodule add https://github.com/drmikehenry/vimfiles.git $BASH_HOME/vim
-        git submodule init
+  git submodule init
 	git submodule update
 }
 
@@ -82,16 +103,24 @@ function setup_bashrc() {
 
 function setup() {
 	green_text "Auto setup is started"
+
 	setup_gitconfig
 	green_text "[gitconfig] is created"
+
+	setup_gitdiff
+	green_text "[gitdiff] is created"
+
 	setup_vim
 	green_text "[vim] is created"
+
 	setup_softlink
 	green_text "[softlink] is created"
+
 	setup_bashrc
 	green_text "Auto setup is finished"
 
 	chmod a+x plugins/git-push-remote-option.sh
+	echo "alias git-push=sh $BASH_HOME/plugins/git-push-remote-option.sh" >> $BASH_HOME/bash_profile
 
 	echo "Please login again"
 }

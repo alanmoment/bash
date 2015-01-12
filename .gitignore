@@ -2,3 +2,5 @@ vim
 .gitmodules
 *.swp
 gitconfig
+plugins/icdiff
+plugins/git-diff-wrapper.sh
