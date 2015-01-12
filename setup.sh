@@ -56,6 +56,23 @@ function setup_gitdiff() {
 	echo "" >> $BASH_HOME/bash_profile
 	echo "# git diff alias" >> $BASH_HOME/bash_profile
 	echo "alias icdiff=$BASH_HOME/plugins/icdiff --highlight" >> $BASH_HOME/bash_profile
+	source $HOME/.bash_profile
+}
+
+function setup_gitpush() {
+	filename="$HOME/.bash_profile"
+	exec < $filename
+	WRITE=true
+	while read line
+	do
+		[[ `echo "${line}" | grep "^alias git-push *"` ]] && WRITE=false
+	done
+
+	if [[ -f "$BASH_HOME/plugins/git-push-remote-option.sh" && $WRITE == true ]]; then
+		chmod a+x plugins/git-push-remote-option.sh
+		echo "alias git-push=sh $BASH_HOME/plugins/git-push-remote-option.sh" >> $BASH_HOME/bash_profile
+		source $HOME/.bash_profile
+	fi
 }
 
 function green_text() {
@@ -108,7 +125,10 @@ function setup() {
 	green_text "[gitconfig] is created"
 
 	setup_gitdiff
-	green_text "[gitdiff] is created"
+	green_text "[git diff] is created"
+
+	setup_gitpush
+	green_text "[git push] is created"
 
 	setup_vim
 	green_text "[vim] is created"
@@ -118,9 +138,6 @@ function setup() {
 
 	setup_bashrc
 	green_text "Auto setup is finished"
-
-	chmod a+x plugins/git-push-remote-option.sh
-	echo "alias git-push=sh $BASH_HOME/plugins/git-push-remote-option.sh" >> $BASH_HOME/bash_profile
 
 	echo "Please login again"
 }
