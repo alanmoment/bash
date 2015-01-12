@@ -19,24 +19,22 @@ function setup_gitconfig() {
 			echo "        ${USERDATA[$i]} = ${MY[$i]}" >> $FILE
 		done
 		echo "[core]" >> $FILE
-		echo "        quotepath = false # chinese file" >> $FILE
-    echo "        editor = /usr/bin/vim # fix error: There was a problem with the editor 'vi'" >> $FILE
+		echo "		quotepath = false # chinese file" >> $FILE
+    echo "		editor = /usr/bin/vim # fix error: There was a problem with the editor 'vi'" >> $FILE
 		echo "[color]" >> $FILE
-		echo "        diff = auto" >> $FILE
-		echo "        status = auto" >> $FILE
-		echo "        branch = auto" >> $FILE
-		echo "        log = auto" >> $FILE
-		echo "        ui = auto" >> $FILE
+		echo "		diff = auto" >> $FILE
+		echo "		status = auto" >> $FILE
+		echo "		branch = auto" >> $FILE
+		echo "		log = auto" >> $FILE
+		echo "		ui = auto" >> $FILE
 		echo "[alias]" >> $FILE
-		echo "        co = checkout" >> $FILE
-		echo "        ci = commit" >> $FILE
-		echo "        st = status" >> $FILE
-		echo "        br = branch" >> $FILE
-		echo "        mg = merge --no-ff" >> $FILE
+		echo "		co = checkout" >> $FILE
+		echo "		ci = commit" >> $FILE
+		echo "		st = status" >> $FILE
+		echo "		br = branch" >> $FILE
+		echo "		mg = merge --no-ff" >> $FILE
 		echo "[push]" >> $FILE
-		echo "        default = simple" >> $FILE
-		echo "[diff]" >> $FILE
-		echo "				external = $BASH_HOME/plugins/git-diff-wrapper.sh" >> $FILE
+		echo "		default = simple" >> $FILE
 	fi
 }
 
@@ -56,15 +54,14 @@ function setup_gitdiff() {
 	echo "" >> $BASH_HOME/extra_bash_profile
 	echo "# git diff alias" >> $BASH_HOME/extra_bash_profile
 	echo "alias icdiff=$BASH_HOME/plugins/icdiff --highlight" >> $BASH_HOME/extra_bash_profile
-	source $HOME/.bash_profile
 
 	FILE=$BASH_HOME/gitconfig
 	echo "[diff]" >> $FILE
-	echo "				external = $BASH_HOME/plugins/git-diff-wrapper.sh" >> $FILE
+	echo "		external = $BASH_HOME/plugins/git-diff-wrapper.sh" >> $FILE
 }
 
 function setup_gitpush() {
-	filename="$HOME/.bash_profile"
+	filename="$BASH_HOME/extra_bash_profile"
 	exec < $filename
 	WRITE=true
 	while read line
@@ -75,7 +72,6 @@ function setup_gitpush() {
 	if [[ -f "$BASH_HOME/plugins/git-push-remote-option.sh" && $WRITE == true ]]; then
 		chmod a+x plugins/git-push-remote-option.sh
 		echo "alias git-push=sh $BASH_HOME/plugins/git-push-remote-option.sh" >> $BASH_HOME/extra_bash_profile
-		source $HOME/.bash_profile
 	fi
 }
 

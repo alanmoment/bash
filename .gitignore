@@ -4,3 +4,4 @@ vim
 gitconfig
 plugins/icdiff
 plugins/git-diff-wrapper.sh
+extra_bash_profile
