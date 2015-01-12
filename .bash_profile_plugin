@@ -1,0 +1,6 @@
+
+# git diff alias
+alias icdiff="$BASH_HOME/plugins/icdiff --highlight"
+
+# git push menu alias
+alias git-push="sh ${BASH_HOME}/plugins/git-push-remote-option.sh"
