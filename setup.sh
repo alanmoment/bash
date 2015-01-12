@@ -71,6 +71,8 @@ function setup_gitpush() {
 
 	if [[ -f "$BASH_HOME/plugins/git-push-remote-option.sh" && $WRITE == true ]]; then
 		chmod a+x plugins/git-push-remote-option.sh
+		echo "" >> $BASH_HOME/extra_bash_profile
+		echo "# git push menu alias" >> $BASH_HOME/extra_bash_profile
 		echo "alias git-push=sh $BASH_HOME/plugins/git-push-remote-option.sh" >> $BASH_HOME/extra_bash_profile
 	fi
 }
