@@ -9,6 +9,7 @@ function alan {
   echo "Here is Documents home."
 }
 
+alias helpme="cat ~/bash/.bash_profile"
 alias go="find ./ | xargs grep -a -i --color=auto -n3 -s $1"
 alias reload="source ~/.bash_profile"
 alias composer="$BASH_HOME/plugins/composer.phar"
@@ -18,6 +19,7 @@ alias ll="ls -all"
 alias tomcat-log="tail -f tail -f /usr/lib/tomcat7/logs/catalina.out"
 alias tomcat-down="sudo /usr/lib/tomcat7/bin/shutdown.sh"
 alias tomcat-start="sudo /usr/lib/tomcat7/bin/startup.sh"
+alias ngrok="~/ngrok $1"
 
 # git
 # Get Git Branch information
@@ -54,3 +56,5 @@ PS1="[\[\033[1;31m\]\$(my_hostname)\[\033[0m\]\[\033[1;32m\]\w\[\033[0m\]] \[\03
 [ -f $BASH_HOME/plugins/git-bash-completion.sh ] && . $BASH_HOME/plugins/git-bash-completion.sh
 
 . $BASH_HOME/.bash_profile_plugin
+
+. ${BASH_HOME}/plugins/z/z.sh
