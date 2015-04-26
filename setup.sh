@@ -106,7 +106,8 @@ function green_text() {
 
 function setup_vim() {
 	git submodule add https://github.com/drmikehenry/vimfiles.git $BASH_HOME/vim
-  git submodule init
+	git submodule add https://github.com/rupa/z.git $BASH_HOME/plugins/z
+  	git submodule init
 	git submodule update
 }
 
