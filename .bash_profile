@@ -10,16 +10,17 @@ function alan {
 }
 
 alias helpme="cat ~/bash/.bash_profile"
-alias go="find ./ | xargs grep -a -i --color=auto -n3 -s $1"
+alias afind="find ./ | xargs grep -a -i --color=auto -n3 -s $1"
 alias reload="source ~/.bash_profile"
 alias composer="$BASH_HOME/plugins/composer.phar"
-alias mvim="open -a /Applications/MacVim.app $1"
 #alias phpunit="$(pwd)/vendor/bin/phpunit"
 alias ll="ls -all"
 alias tomcat-log="tail -f tail -f /usr/lib/tomcat7/logs/catalina.out"
 alias tomcat-down="sudo /usr/lib/tomcat7/bin/shutdown.sh"
 alias tomcat-start="sudo /usr/lib/tomcat7/bin/startup.sh"
 alias ngrok="~/ngrok $1"
+alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl $1"
+alias mvim="open -a /Applications/MacVim.app $1"
 
 # git
 # Get Git Branch information
@@ -42,14 +43,17 @@ function git_since_last_commit {
 # Get local hostname
 function my_hostname {
     if [[ `echo $(hostname) | grep "()"` ]]; then
-        echo $(Hostname)":"; # Mac
+        echo $(Hostname); # Mac
     else
-        echo $(hostname)":"; # Linux
+        echo $(hostname); # Linux
     fi
 }
 
 # Set PS1 color and git branch notification
-PS1="[\[\033[1;31m\]\$(my_hostname)\[\033[0m\]\[\033[1;32m\]\w\[\033[0m\]] \[\033[0m\]\[\033[1;36m\]\$(git_branch)\[\033[0;33m\]\$(git_since_last_commit)\[\033[0m\]$ "
+# \w absolute path
+# \W current path
+PS1="[\[\033[1;31m\]\$(my_hostname)\[\033[0m\]:\[\033[1;32m\]\w\[\033[0m\]] \[\033[0m\]\[\033[1;36m\]\$(git_branch)\[\033[0;33m\]\$(git_since_last_commit)\[\033[0m\]$ "
+#PS1="[\[\033[1;31m\]\$(my_hostname)\[\033[0m\]:\[\033[1;32m\]\W\[\033[0m\]] \[\033[0m\]\[\033[1;36m\]\$(git_branch)\[\033[0;33m\]\$(git_since_last_commit)\[\033[0m\]$ "
 #PS1="[\[\033[1;32m\]\w\[\033[0m\]] \[\033[0m\]\[\033[1;36m\]\$(git_branch)\[ \033[0;33m\]\$(git_since_last_commit)\[\033[0m\] \033[1;32m\]\$(my_hostname)\[\033[0m\]$ "
 #PS1="[\[\033[1;32m\]\w\[\033[0m\]]\[\033[0m\]\[\033[1;36m\]\$(git_branch)\[\033[0;33m\]\$(git_since_last_commit)\[\033[0m\]$ "
 
@@ -58,3 +62,7 @@ PS1="[\[\033[1;31m\]\$(my_hostname)\[\033[0m\]\[\033[1;32m\]\w\[\033[0m\]] \[\03
 . $BASH_HOME/.bash_profile_plugin
 
 . ${BASH_HOME}/plugins/z/z.sh
+
+alias fuck='eval $(thefuck $(fc -ln -1))'
+# You can use whatever you want as an alias, like for Monday:
+alias FUCK='fuck'
